@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical">
+  
+  <TextView android:id="@+id/first_question"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  />
+  
+
+  <RadioGroup android:id="@+id/AnswersGroup"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content">
+  	
+  	<RadioButton android:id="@+id/option1"
+  		android:checked="false" />
+  		
+  	<RadioButton android:id="@+id/option2"
+  		android:checked="false" />
+  		
+  	<RadioButton android:id="@+id/option3"
+  		android:checked="false" />
+  
+  </RadioGroup>
+  
+  <Button android:id="@+id/answerQuestions"
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:text="Answer Question"
+  />
+  
+   <Button android:id="@+id/next_question"
+   	  android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Next Question"
+   />
+   
+   <TextView android:id="@+id/correctAnswer"
+   	  android:layout_width="fill_parent"
+   	  android:layout_height="wrap_content" />
+
+    <TextView android:id="@+id/score"
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent" />
+    
+</LinearLayout>

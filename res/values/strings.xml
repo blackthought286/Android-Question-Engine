@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, startjunkie!</string>
+    <string name="app_name">hip hop junkie</string>
+    <string name="opening_text">Hello welcome to Hip Hop Junkies</string>
+    <string name="first_question">This is your first question:</string>
+</resources>
