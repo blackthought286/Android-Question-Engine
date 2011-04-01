@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class FirstQuestionActivity extends Activity {
@@ -15,6 +16,7 @@ public class FirstQuestionActivity extends Activity {
 	private RadioButton rdQuestionOne;
 	private RadioButton rdQuestionTwo;
 	private RadioButton rdQuestionThree;
+    private RadioGroup rdGroup;
 	private TextView answerBox;
     private TextView scoreBox;
 	
@@ -37,17 +39,26 @@ public class FirstQuestionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.first_question);
 		
-		Button nextButton = (Button)findViewById(R.id.next_question);
+		final Button nextButton = (Button)findViewById(R.id.next_question);
 		Button answerButton = (Button)findViewById(R.id.answerQuestions);
 		
 		addText = (TextView)findViewById(R.id.first_question);
 		answerBox = (TextView)findViewById(R.id.correctAnswer);
         scoreBox = (TextView)findViewById(R.id.score);
 
-        //Create Radio Buton
+        //Create Radio Button Objects
 		rdQuestionOne = (RadioButton)findViewById(R.id.option1);
 		rdQuestionTwo = (RadioButton)findViewById(R.id.option2);
 		rdQuestionThree = (RadioButton)findViewById(R.id.option3);
+
+        rdGroup = (RadioGroup)findViewById(R.id.AnswersGroup);
+
+        //Fill the button text
+        rdQuestionOne.setText("If you are ready to play");
+        rdQuestionTwo.setText("Hit the next button");
+        rdQuestionThree.setText("Good Luck");
+
+
 
 
 		
@@ -57,6 +68,22 @@ public class FirstQuestionActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+
+                //Make sure the Radio Buttons are not filled out when you go to next question
+               /* if(rdQuestionOne.isChecked()){
+                    rdQuestionOne.setChecked(false);
+                }
+
+                if(rdQuestionTwo.isChecked()){
+                    rdQuestionTwo.setChecked(false);
+                }
+
+                if(rdQuestionThree.isChecked()){
+                    rdQuestionThree.setChecked(false);
+                }*/
+
+                rdGroup.clearCheck();
+
 				int x = QuestionNumber();
 				addText.setText(GrabQuestionFromQueue(x));
 				setButtonAnswers(x);
@@ -66,6 +93,7 @@ public class FirstQuestionActivity extends Activity {
                 scoreBox.setText(myScore);
 				
 			}
+
 		});
 		
 		answerButton.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +107,7 @@ public class FirstQuestionActivity extends Activity {
                     if(rdQuestionOne.isChecked() == true){
                         answerBox.setText("Correct");
                         score = increaseScore(score);
+
                     }else{
                         answerBox.setText("Wrong");
                         score = decreaseScore(score);
