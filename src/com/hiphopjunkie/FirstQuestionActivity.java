@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import com.hiphopjunkie.R;
 
 public class FirstQuestionActivity extends Activity {
 
@@ -29,9 +30,8 @@ public class FirstQuestionActivity extends Activity {
     //we are also converting the int to a string before we
     //place it in the current TextView
     int score = 0;
+    int changeScore = 0;
     String myScore;
-	
-	private Object[] ans;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class FirstQuestionActivity extends Activity {
 
 
 
-		
 
 		nextButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -69,18 +68,6 @@ public class FirstQuestionActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-                //Make sure the Radio Buttons are not filled out when you go to next question
-               /* if(rdQuestionOne.isChecked()){
-                    rdQuestionOne.setChecked(false);
-                }
-
-                if(rdQuestionTwo.isChecked()){
-                    rdQuestionTwo.setChecked(false);
-                }
-
-                if(rdQuestionThree.isChecked()){
-                    rdQuestionThree.setChecked(false);
-                }*/
 
                 rdGroup.clearCheck();
 
@@ -89,9 +76,11 @@ public class FirstQuestionActivity extends Activity {
 				setButtonAnswers(x);
 
                 //converting int to String so it can be shown as the score
-                myScore = Integer.toString(score);
+                changeScore = score;
+                myScore = Integer.toString(changeScore);
                 scoreBox.setText(myScore);
-				
+
+
 			}
 
 		});
@@ -129,11 +118,60 @@ public class FirstQuestionActivity extends Activity {
                         score = decreaseScore(score);
                     }
                 }
-				
+
 			}
 		});
+
+        restoreState(savedInstanceState);
 		
 	}
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+            CharSequence saveScore = scoreBox.getText();
+            CharSequence answer = answerBox.getText();
+
+            int _score = score;
+
+            if(saveScore != null){
+               outState.putCharSequence("save", saveScore);
+            }
+
+            if(answer != null){
+                outState.putCharSequence("answer", answer);
+            }
+
+            if(_score != -1){
+                outState.putInt("scoreAmount", _score);
+            }
+
+
+
+    }
+
+    private void restoreState(Bundle state){
+
+        int hello = 0;
+        if(state != null){
+            String _score = state.getString("save");
+            String _answer = state.getString("answer");
+            int createScore = state.getInt("scoreAmount");
+
+            scoreBox.setText(_score);
+            answerBox.setText(_answer);
+
+            score = createScore;
+
+
+
+
+        }
+    }
+
+
+
+
 	
 	private String GrabQuestionFromQueue(int n){
 		
